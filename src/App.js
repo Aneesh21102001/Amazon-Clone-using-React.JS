@@ -1,24 +1,81 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import Header from './Header';
+import Home from './Home';
+import Checkout from './Checkout';
+import Login from './Login';
+import Payment from './Payment';
+import PrivacyNotice from './PrivacyNotice'; 
+import CookiesNotice from './CookiesNotice'; 
+import Orders from './Orders';
+import InternetBasedAdsNotice from './InternetBasedAdsNotice'; // Import the InterestBasedAdsNotice component
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { auth } from './firebase';
+import { useStateValue } from './StateProvider';
+import {loadStripe} from '@stripe/stripe-js'
+import {Elements} from '@stripe/react-stripe-js'
+
+const promise = loadStripe('pk_test_51PxODLRtnoJXznJkEFb5UeVdZhhJz7e0Jq9oCFuMo7xuIYnhGiuov844JxmEhF05ZMcZy0Rtxb5oV0WYo9HWGCmZ00m6Rvi9Wq');
 
 function App() {
+  const [{}, dispatch] = useStateValue();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      console.log('THE USER IS >>>', authUser);
+      if (authUser) {
+        // The user just logged in / the user was logged in
+        dispatch({
+          type: 'SET_USER',
+          user: authUser,
+        });
+      } else {
+        // The user logged out
+        dispatch({
+          type: 'SET_USER',
+          user: null,
+        });
+      }
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app">
+        {/* Header is outside of Routes to always be visible */}
+        <Header />
+
+        {/* Routes is the new Switch */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          
+          {/* Checkout route */}
+          <Route path="/checkout" element={<Checkout />} />
+
+          {/* Login route */}
+          <Route path="/login" element={<Login />} />
+
+          {/* Add Privacy Notice route */}
+          <Route path="/privacy" element={<PrivacyNotice />} /> 
+
+          {/* Add Cookies Notice route */}
+          <Route path="/cookies" element={<CookiesNotice />} />  
+
+          {/* Add Interest-Based Ads Notice route */}
+          <Route path="/ads" element={<InternetBasedAdsNotice />} />
+
+          {/* Orders Route */}
+          <Route path="/orders" element={<Orders />} />
+
+          {/* Payment Route with Elements provider */}
+          <Route path="/payment" element={
+            <Elements stripe={promise}>
+              <Payment />
+            </Elements>
+          } />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

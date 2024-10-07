@@ -1,0 +1,147 @@
+/* General styles for the login page */
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    background-color: #f3f3f3;
+}
+
+.login__logo {
+    width: 100px;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+/* Container for login form */
+.login__container {
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Sign-in form heading */
+.login__container h1 {
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Form input fields */
+.login__container h5 {
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.login__container input[type="text"], 
+.login__container input[type="password"] {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+/* Button styles */
+.login__signInButton, .login__guestButton {
+    width: 100%;
+    background-color: #f0c14b;
+    border: 1px solid;
+    margin-top: 10px;
+    border-color: #a88734 #9c7e31 #846a29;
+    color: #111;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.login__signInButton:hover, 
+.login__guestButton:hover {
+    background-color: #ddb347;
+}
+
+.login__toggleButton {
+    background-color: #f0c14b;
+    border: 1px solid #a88734;
+    color: #111;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+/* Show password checkbox styling */
+.showPassword {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.showPassword input {
+    margin-right: 5px;
+    transform: scale(1.2); /* Makes the checkbox slightly bigger */
+}
+
+/* Styling the conditions box */
+.login__acceptCondition {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.login__acceptCondition input[type='checkbox'] {
+    margin-right: 10px;
+    transform: scale(1.2); /* Makes the checkbox slightly bigger */
+}
+
+.login__condition {
+    color: #555;
+    line-height: 1.5;
+}
+
+.login__condition strong {
+    color: #111;
+}
+
+.login__condition a {
+    color: #0066c0;
+    text-decoration: none;
+}
+
+.login__condition a:hover {
+    text-decoration: underline;
+}
+
+/* New account link styling */
+.login__newAccount {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.login__newAccount p {
+    color: #555;
+}
+
+.login__newAccount a {
+    color: #0066c0;
+    text-decoration: none;
+}
+
+.login__newAccount a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .login__container {
+        width: 80%;
+    }
+}
