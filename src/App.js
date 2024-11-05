@@ -15,7 +15,7 @@ import { useStateValue } from './StateProvider';
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements} from '@stripe/react-stripe-js'
 
-const promise = loadStripe('pk_test_51PxODLRtnoJXznJkEFb5UeVdZhhJz7e0Jq9oCFuMo7xuIYnhGiuov844JxmEhF05ZMcZy0Rtxb5oV0WYo9HWGCmZ00m6Rvi9Wq');
+const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 function App() {
   const [{}, dispatch] = useStateValue();
